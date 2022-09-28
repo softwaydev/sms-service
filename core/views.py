@@ -2,7 +2,6 @@
 import logging
 
 from django.conf import settings
-from django.shortcuts import redirect
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
 from rest_framework import status
@@ -14,8 +13,9 @@ from . import models
 logger = logging.getLogger('sms_service')
 
 
+@api_view(['GET'])
 def index(request):
-    return redirect('/doc/')
+    return Response()
 
 
 @api_view(['POST'])

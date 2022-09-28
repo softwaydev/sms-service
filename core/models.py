@@ -16,18 +16,18 @@ class Sms(models.Model):
 
 
 class SmsSendResult(models.Model):
-    sms = models.OneToOneField(Sms, related_name='send_result')
+    sms = models.OneToOneField(Sms, related_name='send_result', on_delete=models.CASCADE)
     send_dt = models.DateTimeField(auto_now_add=True)
     is_success = models.BooleanField()
 
 
 class SmsPart(models.Model):
-    sms = models.ForeignKey(Sms, related_name='parts')
+    sms = models.ForeignKey(Sms, related_name='parts', on_delete=models.CASCADE)
     external_id = models.CharField(max_length=255, unique=True)
 
 
 class SmsSendError(models.Model):
-    sms = models.OneToOneField(Sms, related_name='send_error')
+    sms = models.OneToOneField(Sms, related_name='send_error', on_delete=models.CASCADE)
     message = models.CharField(max_length=255)
     code = models.IntegerField(null=True)
     description = models.CharField(max_length=255, blank=True)
@@ -35,7 +35,7 @@ class SmsSendError(models.Model):
 
 
 class SmsPartSendState(models.Model):
-    sms_part = models.OneToOneField(SmsPart)
+    sms_part = models.OneToOneField(SmsPart, on_delete=models.CASCADE)
     code = models.IntegerField()
     description = models.CharField(max_length=255)
     price = models.DecimalField(decimal_places=2, max_digits=5, null=True)
